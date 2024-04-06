@@ -10,13 +10,12 @@ public class Jumping : MonoBehaviour
     public float maxDistance;
     public LayerMask groundlayer;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    // Update wird einmal pro Frame aufgerufen, führt Springen aus
     void Update()
     {
         if (Groundcheck() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))){
@@ -29,6 +28,7 @@ public class Jumping : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawCube(transform.position-transform.up*maxDistance,boxSize);
     }
+    //malt Cube, keine Parameter
 
     bool Groundcheck(){
         if(Physics2D.BoxCast(transform.position,boxSize,0,-transform.up,maxDistance,groundlayer)){
@@ -37,5 +37,7 @@ public class Jumping : MonoBehaviour
             return false;
         }
     }
+    /*https://www.youtube.com/watch?v=jxCVHBMdTWo
+    Erklärung für den Boxcast, checkt ob der Charakter auf dem Boden ist*/
 }
 
