@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class KillPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject player;
+    public Transform respawnPoint;
+    // vor dem ersten Frame-Update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    // einmal pro Frame
     void Update()
     {
         
+    }
+    
+    // setzt bei Kollision die Position des Players auf den Respawn Punkt zurück
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")){
+            player.transform.position = respawnPoint.position;
+        }
     }
 }
