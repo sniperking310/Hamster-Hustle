@@ -293,7 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67013d9f9ec0ef4c83c158d30759940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  jumping: {fileID: 1963677091}
+  speed: 3
+  rg: {fileID: 1963677090}
+  moveHorizontal: 0
 --- !u!212 &1963677087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -452,6 +455,7 @@ MonoBehaviour:
   groundlayer:
     serializedVersion: 2
     m_Bits: 8
+  isJumping: 0
 --- !u!1 &2139257343
 GameObject:
   m_ObjectHideFlags: 0

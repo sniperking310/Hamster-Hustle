@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Jumping : MonoBehaviour
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask groundlayer;
+    public Boolean isJumping;
 
     void Start()
     {
@@ -19,7 +21,11 @@ public class Jumping : MonoBehaviour
     void Update()
     {
         if (Groundcheck() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))){
+            isJumping = true;
             rg.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        }
+        else{
+            isJumping = false;
         }
 
     }
@@ -30,7 +36,7 @@ public class Jumping : MonoBehaviour
     }
     //malt Cube, keine Parameter
 
-    bool Groundcheck(){
+    public bool Groundcheck(){
         if(Physics2D.BoxCast(transform.position,boxSize,0,-transform.up,maxDistance,groundlayer)){
             return true;
         }else{
