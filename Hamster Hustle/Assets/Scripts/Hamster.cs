@@ -22,11 +22,11 @@ public class Hamster : MonoBehaviour
     private PhysicsMaterial2D noFriction;
     private PhysicsMaterial2D fullFriction;
     private Vector2 newVelocity;
-    public BoxCollider2D boxcollider;
+    public CapsuleCollider2D boxcollider;
 
     void Start()
     {
-        boxcollider = GetComponent<BoxCollider2D>();
+        boxcollider = GetComponent<CapsuleCollider2D>();
         capsuleColliderSize = boxcollider.size;
     }
 
@@ -111,21 +111,21 @@ public class Hamster : MonoBehaviour
     {
         if (jumping.Groundcheck() && !isOnSlope && !jumping.isJumping) //if on ground
         {
-            newVelocity.Set(speed * moveHorizontal, 0.0f);
+            newVelocity.Set(speed * moveHorizontal, rg.velocity.y);
             rg.velocity = newVelocity;
-            rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
+            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (jumping.Groundcheck() && isOnSlope && canWalkOnSlope && !jumping.isJumping) //If on slope
         {
             newVelocity.Set(speed * slopeNormalPerp.x * -moveHorizontal, speed * slopeNormalPerp.y * -moveHorizontal);
             rg.velocity = newVelocity;
-            rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
+            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (!jumping.Groundcheck()) //If in air
         {
             newVelocity.Set(speed * moveHorizontal, rg.velocity.y);
             rg.velocity = newVelocity;
-            rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
+            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
     }
 
