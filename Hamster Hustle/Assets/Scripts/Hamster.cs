@@ -14,20 +14,17 @@ public class Hamster : MonoBehaviour
     private bool isOnSlope;
     private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
-    private float slopeDownAngle;
-    private float lastSlopeAngle;
-    private float maxSlopeAngle;
     private bool canWalkOnSlope;
     public float moveHorizontal;
     private PhysicsMaterial2D noFriction;
     private PhysicsMaterial2D fullFriction;
     private Vector2 newVelocity;
-    public CapsuleCollider2D boxcollider;
+    public CapsuleCollider2D capsuleCollider;
 
     void Start()
     {
-        boxcollider = GetComponent<CapsuleCollider2D>();
-        capsuleColliderSize = boxcollider.size;
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        capsuleColliderSize = capsuleCollider.size;
     }
 
     // ändere Charakterbewegung
@@ -75,6 +72,9 @@ public class Hamster : MonoBehaviour
     private void SlopeCheckVertical(Vector2 checkPos)
     {
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
+        float slopeDownAngle = 0;
+        float lastSlopeAngle = 0;
+        float maxSlopeAngle = 0;
         if (hit)
         {
             slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;            
@@ -113,19 +113,16 @@ public class Hamster : MonoBehaviour
         {
             newVelocity.Set(speed * moveHorizontal, rg.velocity.y);
             rg.velocity = newVelocity;
-            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (jumping.Groundcheck() && isOnSlope && canWalkOnSlope && !jumping.isJumping) //If on slope
         {
             newVelocity.Set(speed * slopeNormalPerp.x * -moveHorizontal, speed * slopeNormalPerp.y * -moveHorizontal);
             rg.velocity = newVelocity;
-            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (!jumping.Groundcheck()) //If in air
         {
             newVelocity.Set(speed * moveHorizontal, rg.velocity.y);
             rg.velocity = newVelocity;
-            //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
     }
 
