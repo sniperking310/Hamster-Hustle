@@ -5,13 +5,10 @@ using UnityEngine;
 
 public class Hamster : MonoBehaviour
 {
-    //speed of character movement
     public Jumping jumping;
     public float speed = 1;
     public Rigidbody2D rg;
-    //private Transform groundCheck;
-    //private float groundCheckRadius;
-    private LayerMask whatIsGround;
+    public LayerMask whatIsGround;
     private Vector2 capsuleColliderSize;
     private float slopeCheckDistance;
     private bool isOnSlope;
@@ -25,47 +22,32 @@ public class Hamster : MonoBehaviour
     private PhysicsMaterial2D noFriction;
     private PhysicsMaterial2D fullFriction;
     private Vector2 newVelocity;
+    public BoxCollider2D boxcollider;
 
-    // called when initializing the character
     void Start()
     {
-        
+        boxcollider = GetComponent<BoxCollider2D>();
+        capsuleColliderSize = boxcollider.size;
     }
 
-    // changes movement of character
+    // ändere Charakterbewegung
     void FixedUpdate()
     {
-        
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         jumping.Groundcheck();
         SlopeCheck();
         ApplyMovement();
-        
-        //float moveHorizontal = Input.GetAxis("Horizontal");
-        //rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
     }
 
-    /*private void Groundcheck(){
-        if(Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround)){
-            isGrounded = true;
-        }else{
-            isGrounded = false;
-        }
-        if(rg.velocity.y <= 0.0f)
-        {
-            isJumping = false;
-        }
-        //isjumping = false setzen in jumping.cs, wenn nicht am springen also taste nicht gedrückt
-    }*/
-
+    //überprüfe auf Hügel
     private void SlopeCheck()
     {
-        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, capsuleColliderSize.y / 2));
-
+        Vector2 checkPos =  transform.position - (Vector3)(new Vector2(0.0f, capsuleColliderSize.y / 2));
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
 
+    //zeichne senkrechten Pfeil zur Erkennung der Schrägen
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
@@ -89,9 +71,9 @@ public class Hamster : MonoBehaviour
         }
     }
 
+    //zeichne Pfeil entlang der Slope im 45 Grad Winkel
     private void SlopeCheckVertical(Vector2 checkPos)
     {
-        //moveHorizontal = Input.GetAxis("Horizontal");
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, whatIsGround);
         if (hit)
         {
@@ -127,33 +109,25 @@ public class Hamster : MonoBehaviour
 
     private void ApplyMovement()
     {
-        //moveHorizontal = Input.GetAxis("Horizontal");
-        Debug.Log(jumping.Groundcheck() + " " + isOnSlope + " " + canWalkOnSlope + " " + !jumping.isJumping);
-        if (jumping.Groundcheck() && !isOnSlope && !jumping.isJumping) //if not on slope
+        if (jumping.Groundcheck() && !isOnSlope && !jumping.isJumping) //if on ground
         {
-            //Debug.Log("horizontal");
             newVelocity.Set(speed * moveHorizontal, 0.0f);
             rg.velocity = newVelocity;
             rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (jumping.Groundcheck() && isOnSlope && canWalkOnSlope && !jumping.isJumping) //If on slope
         {
-            Debug.Log("on slope");
             newVelocity.Set(speed * slopeNormalPerp.x * -moveHorizontal, speed * slopeNormalPerp.y * -moveHorizontal);
             rg.velocity = newVelocity;
             rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
         else if (!jumping.Groundcheck()) //If in air
         {
-            Debug.Log("in air");
             newVelocity.Set(speed * moveHorizontal, rg.velocity.y);
             rg.velocity = newVelocity;
             rg.AddForce(Vector2.right * speed * moveHorizontal, ForceMode2D.Impulse);
         }
-        else
-        {
-            Debug.Log("not good");
-        }
-
     }
+
+    //mit Inspiration aus folgendem Video: https://www.youtube.com/watch?v=QPiZSTEuZnw
 }
