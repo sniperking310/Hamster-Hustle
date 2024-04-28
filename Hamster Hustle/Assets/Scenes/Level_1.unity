@@ -6436,7 +6436,6 @@ MonoBehaviour:
   player: {fileID: 459839814}
   gameOverUI: {fileID: 1657606945}
   respawnPoint: {fileID: 1439747831}
---- !u!114 &998127270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
