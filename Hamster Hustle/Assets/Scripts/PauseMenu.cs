@@ -11,28 +11,20 @@ public class PauseMenu : MonoBehaviour
 
 
     // Update is called once per frame
+    // Spiel pausieren mit P- oder Escape Button
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown(KeyCode.P))
         {
             if (GameIsPaused){
                 Resume();
             }else{
                 Pause();
             }
-
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (GameIsPaused){
-                Resume();
-            }else{
-                Pause();
-            }
-
         }
     }
 
+    //weiter spielen
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -40,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    //Spiel pausieren
     void Pause()
     {
         pauseMenuUI.SetActive(true);
@@ -47,6 +40,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    //Scene wechseln
     public void LoadMenu(int index)
     {
         Time.timeScale = 1f;
