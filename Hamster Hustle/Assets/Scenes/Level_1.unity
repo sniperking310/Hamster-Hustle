@@ -1470,7 +1470,7 @@ Transform:
   m_GameObject: {fileID: 214832271}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.467084, y: -2.4129944, z: -10}
+  m_LocalPosition: {x: -9.212675, y: -2.4129944, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6775,7 +6775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a04e2b815acd18439107cda8ef7884c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 459839814}
+  player: {fileID: 2011666674}
   gameOverUI: {fileID: 1657606945}
   respawnPoint: {fileID: 1439747831}
 --- !u!114 &998127271
@@ -6803,7 +6803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903c7360eabef374fae752de57ae9558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 459839814}
+  player: {fileID: 2011666674}
   completeLevelUI: {fileID: 937004413}
 --- !u!1 &1051255501
 GameObject:
@@ -8342,7 +8342,7 @@ Transform:
   m_GameObject: {fileID: 1287383630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.052709, y: -2.4472804, z: -10}
+  m_LocalPosition: {x: -10.201826, y: -2.4472804, z: -10}
   m_LocalScale: {x: 4.6875, y: 0.09513752, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
