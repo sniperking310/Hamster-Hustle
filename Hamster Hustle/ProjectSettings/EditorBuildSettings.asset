@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Break.unity
     guid: 1a56a16392818104c9a5cf7f7e1a8d6f
+  - enabled: 1
+    path: Assets/Scenes/Level_2.unity
+    guid: cfce3c66b8c814b4089e1895ff4ed396
   m_configObjects: {}
